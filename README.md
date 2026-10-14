@@ -1,52 +1,98 @@
-# NDX Nexus (intern) en Nexus (wereldwijd)
+# Nexus
 
-Programma om installers (setup.exe) te maken. Eén codebase, twee edities:
+Create Windows installers (`setup.exe`) in your own brand style. Pick a program folder, set your logo and colours, translate your license text, and Nexus produces a single, self-contained setup file.
 
-| | **NDX Nexus** (intern) | **Nexus** (wereldwijd) |
-|---|---|---|
-| Bouwen | `build-intern.bat` | `build-open.bat` |
-| Resultaat | `publish\intern\NDXNexus.exe` | `publish\open\Nexus.exe` |
-| Vormgeving van de setups | altijd NDX-huisstijl (logo, routepatroon, slogan) | de maker kiest zelf: logo, kleuren, achtergrond, opstartscherm, slogan, lettertype |
-| NDX-onderdelen in de setup | ja | nee, ook niet als logo of slogan |
+## Features
 
-`build.bat` bouwt beide. Vereist de .NET 8 SDK (`winget install Microsoft.DotNet.SDK.8`). De namen staan op een plek (`Edition.cs`) en zijn dus makkelijk te wijzigen.
+- **One-file setups.** The result is a single `setup.exe` with a wizard, an uninstaller and an entry in *Apps & features*.
+- **Your own look.** Logo, colours, side-panel and splash images, tagline and font are all yours. Without a logo the setup simply shows your program's name. A live **Preview** shows the real wizard (nothing is installed).
+- **Five languages.** The wizard and Nexus itself come in English, Dutch, German, French and Croatian. The setup starts in the language of Windows and the user can switch on the first page.
+- **Automatic EULA translation.** Paste your license text, pick its language and let Nexus translate it into the other four (DeepL, LibreTranslate or the Claude API). Review and edit every language before building. Machine-translated texts are marked in the setup, with a link to the original.
+- **The user decides.** Start menu shortcut, desktop shortcut, taskbar pin, start with Windows and launch after install are all chosen by the user in the wizard. You only set the defaults.
+- **Per user or for all users.** Per-user installs need no administrator rights; all-users installs ask for elevation.
+- **Silent install.** `Setup.exe /S` (optionally `/D=C:\Path` and `/LANG=de`) and `uninstall.exe /S`.
 
-## Taal van Nexus zelf
-De Studio (en alle meldingen) is beschikbaar in Nederlands, Engels, Duits, Frans en Kroatisch. Rechtsboven in de Studio kies je de taal; alles wat je hebt ingevuld blijft staan. Bij het starten gebruikt het programma de taal van Windows (anders Engels). Ook het opstartscherm volgt de taal.
+## Requirements
 
-## Een setup maken
-1. Start de exe (splashscreen, daarna de Studio).
-2. Kies de programmamap; naam, hoofdprogramma en icoon worden voorgesteld.
-3. Vul versie en uitgever in en kies de standaardkeuzes (snelkoppelingen, taakbalk, starten met Windows, starten na installatie). De gebruiker kiest zelf in de wizard.
-4. *(alleen Nexus wereldwijd)* Stel onder **Vormgeving van de setup** logo, kleuren, afbeeldingen, slogan en lettertype in.
-5. Klik **Voorbeeld** om de echte wizard te zien (er wordt niets geïnstalleerd) en daarna **Setup maken**.
-6. Met **Project opslaan** bewaar je alles als `.nexus`-bestand.
+- Windows 10 or 11, 64-bit.
+- To build from source: the [.NET 8 SDK](https://dotnet.microsoft.com/download) (`winget install Microsoft.DotNet.SDK.8`).
 
-## Vormgeving (Nexus wereldwijd)
-- Logo: PNG of JPG; kies er een dat goed leesbaar is op de donkere kleur. Zonder logo toont de setup alleen de naam van het programma.
-- Donkere kleur: zijpaneel, opstartscherm en koppen. Wordt automatisch donker genoeg gemaakt voor witte tekst.
-- Accentkleur: selectie, taalknop, voortgangsbalk. Hoofdknop: de grote knop; de tekstkleur erop wordt automatisch wit of donker gekozen.
-- Het lettertype is Montserrat / Open Sans (zit in de exe) of het Windows-lettertype Segoe UI.
-- De vormgeving blijft ook beschikbaar voor de verwijderaar (map `nexus-brand` naast het programma, wordt bij verwijderen opgeruimd).
+## Download
 
-## Licentie (EULA) en automatisch vertalen
-Plak of laad de originele tekst, kies de taal ervan en klik **Vertalen naar de andere talen**. Drie diensten:
-- **DeepL**: API-sleutel (Free of Pro; Free-sleutels eindigen op `:fx`).
-- **LibreTranslate**: URL van een eigen of externe server, eventueel met sleutel. De tekst blijft op jouw server als je die zelf host.
-- **Claude (Anthropic)**: API-sleutel; vertaalt het hele document met behoud van opmaak. Model is aan te passen.
+Get the latest `Nexus-<version>-win-x64.zip` from the [Releases](../../releases) page, extract it and run `Nexus.exe`. The SHA-256 checksum is in `SHA256.txt`.
 
-Daarna kun je elke taal nalezen en aanpassen (een aangepaste taal telt niet meer als automatische vertaling). In de setup ziet de gebruiker de licentie in de gekozen taal. Is die automatisch vertaald, dan staat er een melding bij dat de originele tekst voorgaat, met een link om het origineel te lezen. Een automatische vertaling is niet juridisch bindend; laat belangrijke voorwaarden controleren door een jurist.
+## Usage
 
-Let op: de tekst wordt naar de gekozen dienst gestuurd. De sleutel wordt alleen bewaard als je "Sleutel onthouden" aanvinkt (in `%LOCALAPPDATA%\<naam>\translator.json`, niet versleuteld).
+1. Start `Nexus.exe`.
+2. Choose the program folder. Name, main program and icon are suggested automatically.
+3. Enter the version and publisher, and set the default options.
+4. Under **Setup design**, add your logo, colours, images and tagline.
+5. Under **License (EULA) and translation**, paste or load your text, choose its language and click **Translate into the other languages**. Check each language.
+6. Click **Preview** to try the wizard, then **Create setup**.
+7. **Save project** stores everything in a `.nexus` file so you can rebuild the next version quickly.
 
-## Wat de setup doet
-Wizard met taalkeuze (Nederlands, Engels, Duits, Frans, Kroatisch), licentie, map, opties, installeren, klaar. Snelkoppelingen, verwijderprogramma, vermelding bij "Apps & onderdelen", per gebruiker of voor alle gebruikers. Stil installeren: `Setup.exe /S` (eventueel `/D=C:\Pad` en `/LANG=de`), stil verwijderen: `uninstall.exe /S`. Foutcode 5 = beheerdersrechten ontbreken.
+### Setup design
 
-## Bekende beperkingen
-- Niet getest op Windows: deze code is zonder compiler geschreven. Meld buildfouten, dan los ik ze op.
-- Vastmaken aan de taakbalk is een beste poging; Windows biedt er geen officiële functie voor.
-- Kroatisch wordt niet door elke vertaaldienst ondersteund.
-- Het icoon van de setup.exe zelf is altijd het Nexus-icoon (het icoon van jouw programma gaat naar snelkoppelingen en Apps & onderdelen).
-- Geen digitale handtekening: Windows SmartScreen kan een waarschuwing tonen.
-- Als de setup niets doet: kijk in `%TEMP%\<naam>-fout.log` (`NDXNexus-fout.log` of `Nexus-fout.log`).
-- Lettertypen: Montserrat en Open Sans zijn SIL OFL (licenties in de map `Fonts`).
+| Option | Notes |
+|---|---|
+| Logo | PNG or JPG; a white or light logo on a transparent background works best on the dark panel. |
+| Dark colour | Side panel, splash and headings. It is darkened automatically if needed so that white text stays readable. |
+| Accent colour | Selection, language buttons and progress bar. |
+| Main button | The large call-to-action button. Its text colour is chosen automatically (white or dark) for good contrast. |
+| Side panel / splash image | Optional. About 240 x 540 and 960 x 540 pixels. |
+| Tagline | Optional line under the welcome text. |
+| Font | Montserrat / Open Sans (bundled) or the Windows system font (Segoe UI). |
+
+The design is also stored next to the installed program (folder `nexus-brand`) so the uninstaller looks the same. It is removed when the program is uninstalled.
+
+### Translating the license text
+
+| Service | You need |
+|---|---|
+| DeepL | An API key (free keys end in `:fx`). |
+| LibreTranslate | The URL of a server, optionally an API key. Self-host it to keep your text private. |
+| Claude (Anthropic) | An Anthropic API key. Translates whole sections and keeps the formatting. The model name can be changed. |
+
+Notes:
+
+- Your license text is sent to the service you choose.
+- The API key is only stored if you tick *Remember key on this computer* (in `%LOCALAPPDATA%\Nexus\translator.json`, not encrypted).
+- Not every service supports Croatian. If a language fails, type or paste it yourself.
+- **A machine translation is not legally binding.** Have important terms reviewed by a lawyer.
+
+## Building from source
+
+```
+build-open.bat
+```
+
+This produces `publish\open\Nexus.exe` (a single self-contained file, about 70 MB because .NET is included).
+
+The repository does not include the splash and header images. The program still starts without them, but the splash screen and the header of the main window stay empty. See `Assets\LEESMIJ-afbeeldingen.txt` for the file names; add your own PNGs with those names.
+
+If something goes wrong at startup, an error message is shown and written to `%TEMP%\Nexus-fout.log`.
+
+## Project layout
+
+| File | Purpose |
+|---|---|
+| `Program.cs` | Start-up, mode detection (studio, installer, uninstaller), silent mode |
+| `Studio.cs` | The main window where setups are created |
+| `Builder.cs`, `Payload.cs` | Creates and reads the setup file (`[exe][zip][length][magic]`) |
+| `Installer.cs`, `Uninstaller.cs` | The wizard, the install engine and the uninstaller |
+| `Theme.cs` | Per-setup design (colours, logo, images, fonts) |
+| `Translator.cs` | DeepL, LibreTranslate and Claude translation |
+| `Strings.cs` | All texts in five languages |
+| `Ui.cs`, `Splash.cs` | Shared controls and the splash screen |
+
+## Known limitations
+
+- Pinning to the taskbar is a best effort. Windows has no official API for it and it may not work on Windows 11.
+- The icon of `setup.exe` itself is always the Nexus icon. Your program's icon is used for shortcuts and *Apps & features*.
+- Setups are not code-signed, so Windows SmartScreen may show a warning.
+- Translations in the user interface were written without a native-speaker review; corrections are welcome.
+
+## Licenses
+
+- Nexus: see `LICENSE`.
+- Montserrat and Open Sans (bundled in `Fonts`) are licensed under the SIL Open Font License; the license texts are included.
