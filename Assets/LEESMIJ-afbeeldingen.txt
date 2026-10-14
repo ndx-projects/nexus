@@ -1,0 +1,9 @@
+Deze map bevat bewust geen NDX-beeldmerken of NDX-routepatronen.
+Zonder deze afbeeldingen start Nexus wel, maar blijven het opstartscherm en de kop van de Studio leeg.
+
+Verwacht door de code, plaats ze zelf in deze map (PNG):
+  nexus-lockup-white.png        logo voor de kop van de Studio
+  splash-open-nl/en/de/fr/hr.png   opstartscherm per taal (960 x 540)
+  ndx-logo-white.png, ndx-icon-white.png, bg-route.png, side-route.png   alleen nodig voor de interne editie
+
+Aanwezig: nexus-icon.png, nexus-mark.png en nexus.ico (het Nexus-icoon).
