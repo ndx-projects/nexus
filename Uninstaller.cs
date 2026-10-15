@@ -114,7 +114,7 @@ namespace NdxNexus
             root.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
             root.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
             root.Background = Edition.IsOpen ? Theme.SplashBrush() : new ImageBrush(Ui.Image("bg-route.png")) { Stretch = Stretch.UniformToFill, Opacity = 0.35 };
-            root.MouseLeftButtonDown += delegate { try { DragMove(); } catch (Exception) { } };
+            root.MouseLeftButtonDown += delegate (object sender, System.Windows.Input.MouseButtonEventArgs e) { if (!e.Handled) { try { DragMove(); } catch (Exception) { } } };
 
             FrameworkElement logo = Theme.LogoElement(Edition.IsOpen ? 150 : 130, log.Name, 20) as FrameworkElement;
             if (logo != null)

@@ -112,6 +112,7 @@ namespace NdxNexus
             { "flt.ico", new[] { "Icoon (*.ico)|*.ico", "Icon (*.ico)|*.ico", "Symbol (*.ico)|*.ico", "Icône (*.ico)|*.ico", "Ikona (*.ico)|*.ico" } },
             { "flt.img", new[] { "Afbeelding|*.png;*.jpg;*.jpeg", "Image|*.png;*.jpg;*.jpeg", "Bild|*.png;*.jpg;*.jpeg", "Image|*.png;*.jpg;*.jpeg", "Slika|*.png;*.jpg;*.jpeg" } },
             { "flt.txt", new[] { "Tekst (*.txt)|*.txt", "Text (*.txt)|*.txt", "Text (*.txt)|*.txt", "Texte (*.txt)|*.txt", "Tekst (*.txt)|*.txt" } },
+            { "flt.setup", new[] { "Setup (*.exe)|*.exe", "Setup (*.exe)|*.exe", "Setup (*.exe)|*.exe", "Installateur (*.exe)|*.exe", "Instalacija (*.exe)|*.exe" } },
             { "flt.exe", new[] { "Programma (*.exe)|*.exe", "Program (*.exe)|*.exe", "Programm (*.exe)|*.exe", "Programme (*.exe)|*.exe", "Program (*.exe)|*.exe" } },
             { "flt.proj", new[] { "{0}-project (*.nexus)|*.nexus", "{0} project (*.nexus)|*.nexus", "{0}-Projekt (*.nexus)|*.nexus", "Projet {0} (*.nexus)|*.nexus", "{0} projekt (*.nexus)|*.nexus" } },
             { "tr.nokey.deepl", new[] { "Vul je DeepL-sleutel in.", "Enter your DeepL key.", "Geben Sie Ihren DeepL-Schlüssel ein.", "Saisissez votre clé DeepL.", "Unesite svoj DeepL ključ." } },

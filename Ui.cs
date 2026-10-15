@@ -172,6 +172,8 @@ namespace NdxNexus
             Apply(false);
             MouseEnter += delegate { Apply(true); };
             MouseLeave += delegate { Apply(false); };
+            // Klik niet laten doorborrelen naar een venster dat DragMove() doet (anders komt de klik nooit aan)
+            MouseLeftButtonDown += delegate (object sender, MouseButtonEventArgs e) { e.Handled = true; };
             MouseLeftButtonUp += delegate { if (IsEnabled && Click != null) Click(); };
             IsEnabledChanged += delegate { Opacity = IsEnabled ? 1.0 : 0.4; };
         }
