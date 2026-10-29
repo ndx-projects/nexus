@@ -43,8 +43,6 @@ Let op: de tekst wordt naar de gekozen dienst gestuurd. De sleutel wordt alleen 
 Wizard met taalkeuze (Nederlands, Engels, Duits, Frans, Kroatisch), licentie, map, opties, installeren, klaar. Snelkoppelingen, verwijderprogramma, vermelding bij "Apps & onderdelen", per gebruiker of voor alle gebruikers. Stil installeren: `Setup.exe /S` (eventueel `/D=C:\Pad` en `/LANG=de`), stil verwijderen: `uninstall.exe /S`. Foutcode 5 = beheerdersrechten ontbreken.
 
 ## Bekende beperkingen
-- Niet getest op Windows: deze code is zonder compiler geschreven. Meld buildfouten, dan los ik ze op.
-- Vastmaken aan de taakbalk is een beste poging; Windows biedt er geen officiële functie voor.
 - Kroatisch wordt niet door elke vertaaldienst ondersteund.
 - Het icoon van de setup.exe zelf is altijd het Nexus-icoon (het icoon van jouw programma gaat naar snelkoppelingen en Apps & onderdelen).
 - Geen digitale handtekening: Windows SmartScreen kan een waarschuwing tonen.
